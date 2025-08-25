@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 
 function TimerForm(props) {
-  const submitText = props.title ? "Update" : "Create";
-
+    const [title, setTitle] = useState(props.title || "");
+  const [project, setProject] = useState(props.project || "");
+  const submitText = props.id ? "Update" : "Create";
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  }
+  const handleProjectChange = (e) => {
+    setProject(e.target.value);
+  }
+  
+  const handleSubmit = () => {
+props.onFormSubmit({
+id: props.id,
+  title,
+project,
+});
+};
   return (
 <div>
           <div className="field">
             <label>Title</label>
-            <input type="text" defaultValue={props.title} />
+        <input type="text" value={title}
+        onChange={handleTitleChange}
+        />
           </div>
           <div className="field">
             <label>Project</label>
-            <input type="text" defaultValue={props.project} />
+        <input type="text" value={project}
+        onChange={handleProjectChange}
+        />
           </div>
           <div className="buttons">
-            <button>{submitText}</button>
-            <button>Cancel</button>
+            <button onClick={handleSubmit}>{submitText}</button>
+            <button onClick={props.onFormClose}>Cancel</button>
           </div>
       </div>
   );

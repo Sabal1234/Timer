@@ -19,6 +19,7 @@ props.onFormSubmit(timer);
   if (editFormOpen) {
     return (
       <TimerForm
+          id={props.id}     
         title={props.title}
         project={props.project}
 onFormSubmit={handleSubmit}
@@ -34,6 +35,7 @@ onFormClose={handleFormClose}
         elapsed={props.elapsed}
         runningSince={props.runningSince}
         onEditClick={handleEditClick}
+        onTrashClick={props.onTrashClick}
       />
     );
   }

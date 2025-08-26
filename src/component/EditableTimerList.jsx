@@ -9,6 +9,8 @@ function EditableTimerList(props) {
             project={timer.project}
             elapsed={timer.elapsed}
             runningSince={timer.runningSince}
+            onFormSubmit={props.onFormSubmit}
+            onTrashClick={props.onTrashClick}
         />
     ));
     return(

@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import helpers from "../utils/helpers";
 
 function Timer(props) {
-  const elapsedString = helpers.renderElapsedString(props.elapsed);
+    const [, setForceRender] = useState(0);
 
+  useEffect(() => {
+  const intervalId = setInterval(() => {
+          setForceRender(prev => prev + 1);
+
+  }, 50);
+
+  return () => clearInterval(intervalId); 
+}, []);
+  const elapsedString = helpers.renderElapsedString(props.elapsed);
+const handleTrashClick = () => {
+props.onTrashClick(props.id);
+};
   return (
     <div>
       <h3>{props.title}</h3>
@@ -12,8 +24,10 @@ function Timer(props) {
 
       <span onClick={props.onEditClick}>
         <button>Edit</button>
-          </span>
-      <button>Delete</button>
+      </span>
+      <span onClick={handleTrashClick}>
+        <button>Delete</button>
+        </span>
         <button>Start</button>
       
     </div>

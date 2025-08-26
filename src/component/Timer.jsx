@@ -10,9 +10,12 @@ function Timer(props) {
       <p>{props.project}</p>
       <h2>{elapsedString}</h2>
 
-      <button>Edit</button>
+      <span onClick={props.onEditClick}>
+        <button>Edit</button>
+          </span>
       <button>Delete</button>
-      <button>Start</button>
+        <button>Start</button>
+      
     </div>
   );
 }

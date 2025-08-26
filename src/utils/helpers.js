@@ -20,7 +20,17 @@ function pad(numberString, size) {
   }
   return padded;
 }
+function newTimer(attrs = {}) {
+  return {
+    title: attrs.title || "Timer",
+    project: attrs.project || "Project",
+    id: Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
+    elapsed: 0,
+    runningSince: null,
+  };
+}
 
 export default {
   renderElapsedString: millisecondsToHuman,
+  newTimer,
 };

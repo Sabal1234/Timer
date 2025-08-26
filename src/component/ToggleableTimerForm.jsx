@@ -5,11 +5,21 @@ function ToggleableTimerForm(props) {
    const handleFormOpen = () => {
        setIsOpen(true);
     
-}
+    }
+    const handleFormClose = () => {
+        setIsOpen(false);
+    }
+    const handleFormSubmit = (timer) => {
+        props.onFormSubmit(timer);
+        setIsOpen(false);
+    };
     if (isOpen) {
         
         return (
-            <TimerForm />
+            <TimerForm
+                onFormSubmit={handleFormSubmit} 
+                onFormClose={handleFormClose}
+    />
             
         );
     } else {

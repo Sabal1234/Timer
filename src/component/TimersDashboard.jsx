@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
+import helpers from "../utils/helpers.js";
 function TimersDashboard() {
     const [timers, setTimers] = useState([
         {
@@ -20,12 +21,19 @@ runningSince: null,
         },
    
   ],
-);
+    );
+    const handleCreateFormSubmit = (timer) => {
+        createTimer(timer);
+    };
+    const createTimer = (timer) => {
+        const t = helpers.newTimer(timer)
+       setTimers([...timers, t]);
+    }
     return (
         <div>
             <EditableTimerList timers={timers}/>
             <ToggleableTimerForm
-                isOpen={true}
+                onFormSubmit={handleCreateFormSubmit}
             />
         </div>
     );

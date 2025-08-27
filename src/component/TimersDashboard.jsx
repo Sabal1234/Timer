@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
 import helpers from "../utils/helpers.js";
+import { v4 as uuidv4 } from "uuid";
 function TimersDashboard() {
     const [timers, setTimers] = useState([
         {
             title: 'Practice squat',
             project: 'Gym Chores',
-            // id: uuid.v4(),
-            id: Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
+            id: uuidv4(),
             elapsed: 5456099,
             runningSince: Date.now(),
         }, {
             title: 'Bake squash',
             project: 'Kitchen Chores',
-            // id: uuid.v4(),
-            id: Date.now().toString() + Math.floor(Math.random() * 1000).toString(),
+            id: uuidv4(),
             elapsed: 1273998,
             runningSince: null,
         },

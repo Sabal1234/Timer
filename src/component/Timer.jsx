@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import helpers from "../utils/helpers";
+import helpers from "../utils/helpers.js";
+import TimerActionButton from "./TimerActionButton.jsx";
 
 function Timer(props) {
     const [, setForceRender] = useState(0);
@@ -11,8 +12,18 @@ function Timer(props) {
   }, 50);
 
   return () => clearInterval(intervalId); 
-}, []);
-  const elapsedString = helpers.renderElapsedString(props.elapsed);
+  }, []);
+  const handleStartClick = () => {
+    props.onStartClick(props.id);
+};
+  const handleStopClick = () => {
+  props.onStopClick(props.id);
+};
+  const elapsedString = helpers.renderElapsedString(
+    props.elapsed + (props.runningSince ? Date.now() - props.runningSince : 0)
+    // props.elapsed
+  
+  );
 const handleTrashClick = () => {
 props.onTrashClick(props.id);
 };
@@ -28,8 +39,12 @@ props.onTrashClick(props.id);
       <span onClick={handleTrashClick}>
         <button>Delete</button>
         </span>
-        <button>Start</button>
-      
+        
+      <TimerActionButton 
+timerIsRunning={!!props.runningSince}
+        onStartClick={handleStartClick}
+        onStopClick={handleStopClick}
+/>
     </div>
   );
 }

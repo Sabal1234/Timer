@@ -31,7 +31,46 @@ function TimersDashboard() {
     };
    const handleTrashClick = (timerId) => {
 deleteTimer(timerId);
-};
+    };
+   const handleStartClick = (timerId) => {
+startTimer(timerId);
+    };
+   const handleStopClick = (timerId) => {
+stopTimer(timerId);
+    };
+    const startTimer = (timerId) => {
+        const now = Date.now();
+        setTimers(
+            timers.map((timer) => {
+                if (timer.id === timerId) {
+                    return {
+                    ...timer,
+                    runningSince:now,
+                } 
+                } else {
+                    return timer;
+                }
+               
+            })
+        )
+    }
+    const stopTimer = (timerId) => {
+        const now = Date.now();
+        setTimers(
+            timers.map((timer) => {
+                if (timer.id === timerId) {
+                    const lastElapsed = now - timer.runningSince;
+                    return {
+                        ...timer,
+                        elapsed: timer.elapsed + lastElapsed,
+                        runningSince:null,
+                    }
+                } else {
+                    return timer;
+                }
+            })
+        )
+    }
     const createTimer = (timer) => {
         const t = helpers.newTimer(timer)
         setTimers([...timers, t]);
@@ -63,6 +102,8 @@ deleteTimer(timerId);
                 timers={timers}
                 onFormSubmit={handleEditFormSubmit}
                 onTrashClick={handleTrashClick}
+                onStartClick={handleStartClick}
+onStopClick={handleStopClick}
             />
             <ToggleableTimerForm
                 onFormSubmit={handleCreateFormSubmit}

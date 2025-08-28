@@ -1,5 +1,4 @@
-import React from "react";
-import EditableTimer from "./EditableTimer.jsx"
+import EditableTimer from "./EditableTimer.jsx";
 function EditableTimerList(props) {
     const timers = props.timers.map((timer) => (
         <EditableTimer

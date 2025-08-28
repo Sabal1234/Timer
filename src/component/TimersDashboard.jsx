@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import helpers from "../utils/helpers.js";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
-import helpers from "../utils/helpers.js";
-import { v4 as uuidv4 } from "uuid";
 function TimersDashboard() {
     const [timers, setTimers] = useState([
         {
@@ -37,6 +37,31 @@ startTimer(timerId);
    const handleStopClick = (timerId) => {
 stopTimer(timerId);
     };
+    const createTimer = (timer) => {
+        const t = helpers.newTimer(timer)
+        setTimers([...timers, t]);
+    }
+    const updateTimer = (attrs) => {
+        setTimers(
+            timers.map((timer) => {
+                if (timer.id === attrs.id) {
+                       return {
+          ...timer,
+          title: attrs.title,
+          project: attrs.project,
+        };
+                
+                } else {
+                    return timer;
+                }
+            }),
+        )
+    }
+    const deleteTimer = (timerId) => {
+        setTimers(
+            timers.filter(t=>t.id!==timerId)
+        )
+    }
     const startTimer = (timerId) => {
         const now = Date.now();
         setTimers(
@@ -70,31 +95,9 @@ stopTimer(timerId);
             })
         )
     }
-    const createTimer = (timer) => {
-        const t = helpers.newTimer(timer)
-        setTimers([...timers, t]);
-    }
-    const updateTimer = (attrs) => {
-        setTimers(
-            timers.map((timer) => {
-                if (timer.id === attrs.id) {
-                       return {
-          ...timer,
-          title: attrs.title,
-          project: attrs.project,
-        };
-                
-                } else {
-                    return timer;
-                }
-            }),
-        )
-    }
-    const deleteTimer = (timerId) => {
-        setTimers(
-            timers.filter(t=>t.id!==timerId)
-        )
-    }
+    
+    
+    
     return (
         <div>
             <EditableTimerList

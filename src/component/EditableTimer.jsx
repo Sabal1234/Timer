@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import TimerForm from "./TimerForm";
+import { useState } from "react";
 import Timer from "./Timer";
+import TimerForm from "./TimerForm";
 
 
 function EditableTimer(props) {

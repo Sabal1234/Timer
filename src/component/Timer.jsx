@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import helpers from "../utils/helpers.js";
 import TimerActionButton from "./TimerActionButton.jsx";
 
@@ -21,7 +21,6 @@ function Timer(props) {
 };
   const elapsedString = helpers.renderElapsedString(
     props.elapsed + (props.runningSince ? Date.now() - props.runningSince : 0)
-    // props.elapsed
   
   );
 const handleTrashClick = () => {

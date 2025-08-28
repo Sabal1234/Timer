@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function TimerForm(props) {
     const [title, setTitle] = useState(props.title || "");

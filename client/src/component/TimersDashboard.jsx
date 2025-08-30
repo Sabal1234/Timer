@@ -1,27 +1,23 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
+import client from "../../public/js/client.js";
 import helpers from "../utils/helpers.js";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
-import client from "../../public/js/client.js"; 
 function TimersDashboard() {
-    const [timers, setTimers] = useState([
-        {
-            title: 'Practice squat',
-            project: 'Gym Chores',
-            id: uuidv4(),
-            elapsed: 5456099,
-            runningSince: Date.now(),
-        }, {
-            title: 'Bake squash',
-            project: 'Kitchen Chores',
-            id: uuidv4(),
-            elapsed: 1273998,
-            runningSince: null,
-        },
-   
-    ],
-    );
+    
+    const [timers, setTimers] = useState([]);
+    useEffect(() => {
+        loadTimersFromServer();
+        const intervalId = setInterval(loadTimersFromServer, 5000); 
+        return () => clearInterval(intervalId); 
+    }, []);
+    
+
+    const loadTimersFromServer = () => {
+        client.getTimers((serverTimers) => {
+            setTimers(serverTimers);
+        });
+    };
    
     const handleCreateFormSubmit = (timer) => {
         createTimer(timer);
@@ -41,6 +37,7 @@ stopTimer(timerId);
     const createTimer = (timer) => {
         const t = helpers.newTimer(timer)
         setTimers([...timers, t]);
+        client.createTimer(t);
     }
     const updateTimer = (attrs) => {
         setTimers(
@@ -57,11 +54,13 @@ stopTimer(timerId);
                 }
             }),
         )
-    }
+ client.updateTimer({ id: attrs.id, title: attrs.title, project: attrs.project });    }
     const deleteTimer = (timerId) => {
         setTimers(
             timers.filter(t=>t.id!==timerId)
         )
+        client.deleteTimer(
+{ id: timerId })
     }
     const startTimer = (timerId) => {
         const now = Date.now();
@@ -69,15 +68,16 @@ stopTimer(timerId);
             timers.map((timer) => {
                 if (timer.id === timerId) {
                     return {
-                    ...timer,
-                    runningSince:now,
-                } 
+                        ...timer,
+                        runningSince: now,
+                    }
                 } else {
                     return timer;
                 }
                
-            })
+            }),
         )
+        client.startTimer({ id: timerId, start: now });
     }
     const stopTimer = (timerId) => {
         const now = Date.now();
@@ -95,6 +95,7 @@ stopTimer(timerId);
                 }
             })
         )
+        client.stopTimer({ id: timerId, stop: now });
     }
     
     

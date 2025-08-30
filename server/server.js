@@ -1,5 +1,4 @@
 import express from "express";
-import bodyParser from "body-parser";
 import fs from "fs";
 import cors from "cors";
 
@@ -7,7 +6,7 @@ const app = express();
 const PORT = 3000;
 const DATA_FILE = "./data.json";
 
-app.use(bodyParser.json());
+
 app.use(cors());
 
 function readData() {
@@ -73,5 +72,5 @@ app.post("/api/timers/stop", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import helpers from "../utils/helpers.js";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";
+import client from "../../public/js/client.js"; 
 function TimersDashboard() {
     const [timers, setTimers] = useState([
         {

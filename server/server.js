@@ -6,9 +6,11 @@ const app = express();
 const PORT = 3000;
 const DATA_FILE = "./data.json";
 
-
-app.use(cors());
-
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods:["GET","POST","PUT","DELETE"],
+}))
+app.use(express.json());
 function readData() {
   const data = fs.readFileSync(DATA_FILE);
   return JSON.parse(data);

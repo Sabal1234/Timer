@@ -1,3 +1,4 @@
+const API_BASE = "http://localhost:3000"; 
 function checkStatus(response) {
   if (response.ok) {
     return response;
@@ -14,7 +15,7 @@ function parseJSON(response) {
 }
 const client = {
   getTimers(success) {
-    return fetch('/api/timers', {
+    return fetch(`${API_BASE}/api/timers`, {
       headers: {
         Accept: 'application/json',
       },
@@ -24,7 +25,7 @@ const client = {
       .then(success);
     },
     startTimer(data) {
-    return fetch('/api/timers/start', {
+    return fetch(`${API_BASE}/api/timers/start`, {
       method: 'post',
       body: JSON.stringify(data),
       headers: {
@@ -34,8 +35,8 @@ const client = {
     }).then(checkStatus);
     },
     stopTimer(data) {
-    return fetch('/api/timers/stop', {
-      method: 'post',
+    return fetch(`${API_BASE}/api/timers/stop`, {
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
         Accept: 'application/json',
@@ -43,7 +44,7 @@ const client = {
       },
     }).then(checkStatus);
     },createTimer(data) {
-    return fetch('/api/timers', {
+    return fetch(`${API_BASE}/api/timers`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -54,7 +55,7 @@ const client = {
 },
 
     deleteTimer(data) { 
-        return fetch('/api/timers', {
+        return fetch(`${API_BASE}/api/timers`, {
             method: 'DELETE',
             body: JSON.stringify(data),
       headers: {
@@ -64,7 +65,7 @@ const client = {
         }).then(checkStatus);
     },
     updateTimer(data) {
-  return fetch('/api/timers', {
+  return fetch(`${API_BASE}/api/timers`, {
     method: 'PUT',
     headers: {
       Accept: 'application/json',

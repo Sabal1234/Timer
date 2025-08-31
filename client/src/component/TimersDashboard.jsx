@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import client from "../../public/js/client.js";
+import client from "../api/client.js";
 import helpers from "../utils/helpers.js";
 import EditableTimerList from "./EditableTimerList.jsx";
 import ToggleableTimerForm from "./ToggleableTimerForm.jsx";

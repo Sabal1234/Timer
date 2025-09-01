@@ -27,24 +27,26 @@ const handleTrashClick = () => {
 props.onTrashClick(props.id);
 };
   return (
-    <div>
+   <div className="timer-card">
       <h3>{props.title}</h3>
       <p>{props.project}</p>
       <h2>{elapsedString}</h2>
-
+ <div className="timer-buttons">
       <span onClick={props.onEditClick}>
         <button>Edit</button>
       </span>
       <span onClick={handleTrashClick}>
         <button>Delete</button>
         </span>
+      
         
       <TimerActionButton 
 timerIsRunning={!!props.runningSince}
         onStartClick={handleStartClick}
         onStopClick={handleStopClick}
 />
-    </div>
+      </div>
+        </div>
   );
 }
 

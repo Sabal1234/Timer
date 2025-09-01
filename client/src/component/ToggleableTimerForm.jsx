@@ -16,15 +16,19 @@ function ToggleableTimerForm(props) {
     if (isOpen) {
         
         return (
+             <div className="overlay">
+      <div className="timer-form">
             <TimerForm
                 onFormSubmit={handleFormSubmit} 
-                onFormClose={handleFormClose}
-    />
+                        onFormClose={handleFormClose}
+                        
+                    /></div>
+                </div>
             
         );
     } else {
         return (
-            <div >
+            <div  className="toggle-button">
                 <button onClick={handleFormOpen}>+</button>
             </div>
         );

@@ -3,11 +3,12 @@ import fs from "fs";
 import cors from "cors";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT||3000;
 const DATA_FILE = "./data.json";
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  // origin: "http://localhost:5173",
+  origin: "*",
   methods:["GET","POST","PUT","DELETE"],
 }))
 app.use(express.json());

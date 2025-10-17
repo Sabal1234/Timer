@@ -1,263 +1,185 @@
-/* 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #9cbee7;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #333;
+  font-family: Roboto;
 }
 
-div {
-  box-sizing: border-box;
+body {
+  background-color: #020508;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('./assets/image.png');
+  padding: 2rem;
+  
 }
 
 #timers {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #e0f0ff; 
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 40rem;
+  margin: 2rem auto;
 }
 
-#timers > div {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.timer-card {
+    background: linear-gradient(135deg, #020508, #1e3a8a, #4f46e5);
+
+  border-radius: 1.2rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-#timers > div:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+.timer-card:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.12);
 }
 
-h3 {
-  margin: 0;
-  font-size: 1.2em;
-  color: #1976d2;
+.timer-card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
-p {
-  margin: 5px 0 10px 0;
-  color: #555;
-  font-size: 0.95em;
+.timer-card p {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
 }
 
-h2 {
-  font-size: 1.6em;
-  margin: 10px 0;
-  color: #111;
+.timer-card h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+button {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  margin-right: 2rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #4338ca;
+  transform: translateY(-0.1rem);
+}
+
+button:active {
+  transform: translateY(0.1rem);
+}
+
+button.cancel {
+  background-color: #ef4444;
+}
+
+button.cancel:hover {
+  background-color: #dc2626;
 }
 
 .timer-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 12px;
-  flex-wrap: wrap; 
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.timer-buttons button {
-  flex: 1;
-  margin: 0;
-  cursor: pointer;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 0.9em;
-  color: rgb(108, 27, 27);
-  transition: all 0.2s ease;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+.timer-form {
+  background: #4e96c7;
+  border-radius: 1.2rem;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 35rem;
+  margin: 0 auto;
 }
 
-.timer-buttons button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+.field label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+  color: #020508;
+  margin-bottom: 0.4rem;
 }
 
-button.edit {
-  background-color: #0c2d4e;
+.field input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.6rem;
+  border: 0.1rem solid #e5e7eb;
+  font-size: 1rem;
+  outline: none;
 }
 
-button.edit:hover {
-  background-color: #1565c0;
-}
-
-button.delete {
-  background-color: #d32f2f;
-}
-
-button.delete:hover {
-  background-color: #b71c1c;
-}
-
-button.start {
-  background-color: #388e3c;
-}
-
-button.start:hover {
-  background-color: #2e7d32;
-}
-
-button.stop {
-  background-color: #f57c00;
-}
-
-button.stop:hover {
-  background-color: #e65100;
+.field input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0.3rem rgba(79, 70, 229, 0.3);
 }
 
 .toggle-button {
-  background-color: #1976d2;
-  color: white;
-  font-size: 28px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin: 30px auto;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.toggle-button:hover {
-  background-color: #1565c0;
-  transform: scale(1.05);
+.toggle-button button {
+  background-color: #f59e0b;
+  color: rgb(0, 0, 0);
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  line-height: 3.5rem;
+}
+
+.toggle-button button:hover {
+  background-color: #d97706;
 }
 
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); 
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  padding: 2rem;
+  z-index: 10;
 }
 
-.timer-form {
-  background-color: #ffffff;
-  padding: 24px;           
-  width: 90%;
-  max-width: 400px;       
-  border-radius: 12px;
-  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;              
-  box-sizing: border-box; 
+.overlay .timer-form {
+  background: #fff;
+  padding: 2rem;
+  max-width: 35rem;
 }
 
-.timer-form .field input {
-  width: 100%;
-  padding: 10px;          
-  font-size: 0.95em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box; 
-}
-
-.timer-form .field input:focus {
-  border: 1px solid #1976d2;
-  outline: none;
-}
-
-.timer-form .buttons {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
-  
-}
-
-.timer-form .buttons .save {
-  flex: 1;
-  padding: 12px 0;
-  font-size: 1em;
-  background-color: #1976d2;
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.timer-form .buttons .save:hover {
-  background-color: #1565c0;
-  transform: translateY(-1px);
-}
-
-.timer-form .buttons .cancel {
-  flex: 1;
-  padding: 12px 0; 
-  font-size: 1em;
-  background-color: #9e9e9e;
-  color: white;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: all 0.2s ease;
-  border: none;
-}
-
-.timer-form .buttons .cancel:hover {
-  background-color: #757575;
-  transform: translateY(-1px);
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   #timers {
-    padding: 10px;
-    margin: 20px auto;
+    width: 90%;
   }
 
-  .timer-buttons {
-    flex-direction: column; 
+  .timer-card h2 {
+    font-size: 2rem;
   }
 
-  .timer-buttons button {
-    flex: 1 0 auto;
-  }
-
-  .toggle-button {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
   }
 }
-.timer-form .buttons .save {
-  background-color: #1976d2;
-  color: white;
-}
-
-.timer-form .buttons .save:hover {
-  background-color: #1565c0;
-}
-
-.timer-form .buttons .cancel {
-  background-color: #9e9e9e;
-  color: white;
-}
-
-.timer-form .buttons .cancel:hover {
-  background-color: #757575;
-} */
